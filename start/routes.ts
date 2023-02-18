@@ -39,6 +39,14 @@ Route.group(() => {
   }).prefix("/films");
 
   Route.group(() => {
+    Route.get("/:id", "ActorsController.getById");
+    Route.get("/", "ActorsController.getAll");
+    Route.post("/", "ActorsController.create");
+    Route.put("/", "ActorsController.update");
+    Route.delete("/:id", "ActorsController.destory");
+  }).prefix("/actors");
+
+  Route.group(() => {
     Route.get("/:id", "CitiesController.getById");
     Route.get("/", "CitiesController.getAll");
     Route.post("/", "CitiesController.create");
