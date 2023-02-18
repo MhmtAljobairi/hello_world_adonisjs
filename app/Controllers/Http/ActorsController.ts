@@ -1,10 +1,10 @@
+
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Actor from 'App/Models/Actor';
 
 export default class ActorsController {
 
     public async getAll(ctx: HttpContextContract) {
-
         var result = await Actor.all();
         return result;
     }
