@@ -37,6 +37,10 @@ Route.group(() => {
   Route.group(() => {
     Route.get("/", "FilmsController.getAll");
   }).prefix("/films");
+  
+  Route.group(() => {
+    Route.get("/", "StoresController.getAll");
+  }).prefix("/stores");
 
   Route.group(() => {
     Route.get("/:id", "ActorsController.getById");
