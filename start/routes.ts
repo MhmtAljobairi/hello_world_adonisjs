@@ -24,20 +24,16 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
   Route.group(() => {
-    Route.get("/init", "UsersController.getInit");
-    Route.get("/:variable/orders", "UsersController.getUserOrders");
-    Route.get("/:variable", "UsersController.getById");
-    Route.get("/", "UsersController.getAll");
+    Route.post("/login", "UsersController.login");
+    Route.post("/logout", "UsersController.logout");
     Route.post("/", "UsersController.create");
-    Route.put("/", "UsersController.update");
-    Route.delete("/", "UsersController.destroy");
   }).prefix("/users");
 
 
   Route.group(() => {
     Route.get("/", "FilmsController.getAll");
   }).prefix("/films");
-  
+
   Route.group(() => {
     Route.get("/", "StoresController.getAll");
   }).prefix("/stores");
