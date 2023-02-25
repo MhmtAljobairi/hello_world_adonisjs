@@ -8,8 +8,19 @@ export default class ActorsController {
     public async getAll(ctx: HttpContextContract) {
 
         var object = await ctx.auth.authenticate();
-        console.log(object);
-        var result = await Actor.all();
+        var cityId = ctx.request.input("cityId");
+        var typeId = ctx.request.input("typeId");
+
+        var query = Actor.query();
+
+        if (cityId) {
+            query.where("city_id", cityId);
+        }
+        if (typeId) {
+            query.where("type_id", typeId);
+        }
+
+        var result = await query;
         return result;
     }
 
