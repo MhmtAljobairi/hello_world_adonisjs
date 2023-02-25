@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User';
+import I18n from '@ioc:Adonis/Addons/I18n'
 
 export default class UsersController {
 
@@ -40,9 +41,25 @@ export default class UsersController {
             ]),
             password: schema.string(),
             full_name: schema.string(),
+        },);
+
+
+        var languageFromHeader = ctx.request.header('language');
+        var langauge: string = languageFromHeader != null ? languageFromHeader : "ar";
+
+        console.log("Language", langauge);
+        const fields = await ctx.request.validate({
+            schema: newSchema,
+            messages: {
+                required: 'The {{ field }} is required to create a new account',
+                'email.unique': 'Email not available',
+                'email.required': I18n
+                    .locale(langauge)
+                    .formatMessage('users.required', { field: "email" }),
+                'email.email': 'Email must be an email format',
+            }
         });
 
-        const fields = await ctx.request.validate({ schema: newSchema });
 
         var user = new User();
 
